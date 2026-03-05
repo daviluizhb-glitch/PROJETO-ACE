@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BH Acessível - Guia de Edificações Acessíveis em Belo Horizonte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">♿</div>
+            <div class="logo-text">BH <span>Acessível</span></div>
+        </div>
+        <button class="menu-toggle" aria-label="Menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#home">Início</a>
+            <a href="#filters">Buscar</a>
+            <a href="#buildings">Edificações</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Encontre <span>Locais Acessíveis</span> em Belo Horizonte</h1>
+            <p>Descubra edificações com infraestrutura completa de acessibilidade para pessoas com deficiência. Rampas, elevadores, banheiros adaptados e muito mais.</p>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar por nome ou endereço no mapa...">
+                <button onclick="searchBuildings()">Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters" id="filters">
+        <div class="container">
+            <h2>Filtrar por Recursos de Acessibilidade</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" onclick="filterBuildings('all')">
+                    <span class="icon">🏢</span> Todos
+                </button>
+                <button class="filter-btn" data-filter="rampa" onclick="filterBuildings('rampa')">
+                    <span class="icon">♿</span> Rampa
+                </button>
+                <button class="filter-btn" data-filter="elevador" onclick="filterBuildings('elevador')">
+                    <span class="icon">🛗</span> Elevador
+                </button>
+                <button class="filter-btn" data-filter="banheiro" onclick="filterBuildings('banheiro')">
+                    <span class="icon">🚻</span> Banheiro Adaptado
+                </button>
+                <button class="filter-btn" data-filter="estacionamento" onclick="filterBuildings('estacionamento')">
+                    <span class="icon">🅿️</span> Estacionamento
+                </button>
+                <button class="filter-btn" data-filter="sinalizacao" onclick="filterBuildings('sinalizacao')">
+                    <span class="icon">🟫</span> Sinalização Tátil
+                </button>
+                <button class="filter-btn" data-filter="braile" onclick="filterBuildings('braile')">
+                    <span class="icon">🔤</span> Braille/Piso Tátil
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buildings Section -->
+    <section class="buildings-section" id="buildings">
+        <div class="container">
+            <div class="section-header">
+                <h2>Edificações Acessíveis em BH</h2>
+                <span class="results-count" id="resultsCount">6 locais encontrados</span>
+            </div>
+            <div class="buildings-grid" id="buildingsGrid">
+                <!-- Cards serão inseridos via JavaScript -->
+            </div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="icon">🔍</div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar com outros termos ou filtros</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nome da Edificação</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <div class="modal-info-item">
+                        <span class="icon">📍</span>
+                        <div>
+                            <strong>Endereço:</strong><br>
+                            <span id="modalAddress">Rua, Número - Bairro</span>
+                        </div>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="icon">🏙️</span>
+                        <div>
+                            <strong>Bairro:</strong><br>
+                            <span id="modalNeighborhood">Bairro</span>
+                        </div>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="icon">📱</span>
+                        <div>
+                            <strong>Contato:</strong><br>
+                            <span id="modalPhone">(31) 99999-9999</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-features">
+                    <h3>Recursos de Acessibilidade</h3>
+                    <div class="features-grid" id="modalFeatures">
+                        <!-- Features serão inseridas via JavaScript -->
+                    </div>
+                </div>
+                <a href="#" target="_blank" rel="noopener" class="modal-map-link" id="modalMapLink">
+                    <span>📍</span> Ver no Google Maps
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contato">
+        <div class="container">
+            <p>♿ BH Acessível - Guia de Locais Acessíveis em Belo Horizonte/MG</p>
+            <p>Facilitando a mobilidade urbana para todos</p>
+            <p>© 2024 BH Acessível. Desenvolvido para promover inclusão.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
